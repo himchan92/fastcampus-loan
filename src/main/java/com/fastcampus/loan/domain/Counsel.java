@@ -27,7 +27,7 @@ import org.hibernate.annotations.Where;
 public class Counsel extends BaseEntity { //생성,수정일자 기본필드담은 엔티티 상속
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //auto increment 적용되기위한 IDENTITY 속성
     @Column(nullable = false, updatable = false)
     private Long counselId; //상담ID
 
