@@ -1,5 +1,6 @@
 package com.fastcampus.loan.service;
 
+import static org.assertj.core.api.AssertionsForClassTypes.entry;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.mockito.Mockito.when;
 
@@ -87,5 +88,21 @@ class ApplicationServiceTest {
         Response actual = applicationService.update(findId, request);
 
         assertThat(actual.getHopeAmount()).isSameAs(request.getHopeAmount());
+    }
+
+    @Test
+    void 존재하는_신청정보_삭제_정상테스트() {
+        Long targetId = 1L;
+
+        Application entity = Application.builder()
+            .applicationId(1L)
+            .build();
+
+        when(applicationRepository.save(ArgumentMatchers.any(Application.class))).thenReturn(entity);
+        when(applicationRepository.findById(targetId)).thenReturn(Optional.ofNullable(entity));
+
+        applicationService.delete(targetId);
+
+        assertThat(entity.getIsDeleted()).isSameAs(true);
     }
 }
