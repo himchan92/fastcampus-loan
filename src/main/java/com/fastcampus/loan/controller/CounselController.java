@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,5 +30,10 @@ public class CounselController extends AbstractController { //요청에 대한 �
     @GetMapping("/{counselId}")
     public ResponseDTO<Response> get(@PathVariable("counselId") Long counselId) {
         return ok(counselService.get(counselId));
+    }
+
+    @PutMapping("/{counselId}")
+    public ResponseDTO<Response> update(@PathVariable("counselId") Long counselId, @RequestBody Request request) {
+        return ok(counselService.update(counselId, request));
     }
 }

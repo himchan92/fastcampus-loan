@@ -85,4 +85,26 @@ public class CounselServiceTest {
 
         assertThrows(BaseException.class, () -> counselService.get(findId));
     }
+
+    @Test
+    void 존재하는_상담요청응답내용_정상수정테스트() {
+        Long findId = 1L;
+
+        Counsel entity = Counsel.builder()
+            .counselId(1L)
+            .name("Member Jung")
+            .build();
+
+        Request request = Request.builder()
+            .name("Member Kim")
+            .build();
+
+        when(counselRepository.save(ArgumentMatchers.any(Counsel.class))).thenReturn(entity);
+        when(counselRepository.findById(findId)).thenReturn(Optional.ofNullable(entity));
+
+        Response actual = counselService.update(findId, request);
+
+        assertThat(actual.getCounselId()).isSameAs(findId);
+        assertThat(actual.getName()).isSameAs(request.getName());
+    }
 }
