@@ -3,6 +3,8 @@ package com.fastcampus.loan.service;
 import com.fastcampus.loan.domain.Counsel;
 import com.fastcampus.loan.dto.CounselDTO.Request;
 import com.fastcampus.loan.dto.CounselDTO.Response;
+import com.fastcampus.loan.exception.BaseException;
+import com.fastcampus.loan.exception.ResultType;
 import com.fastcampus.loan.repository.CounselRepository;
 import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
@@ -28,5 +30,15 @@ public class CounselServiceImpl implements CounselService {
 
         //Response 응답에 상담등록한 데이터 매핑
         return modelMapper.map(created, Response.class);
+    }
+
+    @Override
+    public Response get(Long counselId) {
+        //조회 요청 하되 없으면 사용자정의 예외 처리
+        Counsel counsel = counselRepository.findById(counselId).orElseThrow(() -> {
+            throw new BaseException(ResultType.SYSTEM_ERROR);
+        });
+
+        return modelMapper.map(counsel, Response.class);
     }
 }
