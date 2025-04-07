@@ -67,4 +67,25 @@ class ApplicationServiceTest {
 
         assertThat(actual.getApplicationId()).isSameAs(entity.getApplicationId());
     }
+
+    @Test
+    void 존재하는_신청정보_업데이트_정상테스트() {
+        Long findId = 1L;
+
+        Application entity = Application.builder()
+            .applicationId(1L)
+            .hopeAmount(BigDecimal.valueOf(50000000))
+            .build();
+
+        Request request = Request.builder()
+            .hopeAmount(BigDecimal.valueOf(5000000))
+            .build();
+
+        when(applicationRepository.save(ArgumentMatchers.any(Application.class))).thenReturn(entity);
+        when(applicationRepository.findById(findId)).thenReturn(Optional.ofNullable(entity));
+
+        Response actual = applicationService.update(findId, request);
+
+        assertThat(actual.getHopeAmount()).isSameAs(request.getHopeAmount());
+    }
 }
