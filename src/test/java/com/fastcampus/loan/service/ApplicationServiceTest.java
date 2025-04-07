@@ -8,6 +8,7 @@ import com.fastcampus.loan.dto.ApplicationDTO.Request;
 import com.fastcampus.loan.dto.ApplicationDTO.Response;
 import com.fastcampus.loan.repository.ApplicationRepository;
 import java.math.BigDecimal;
+import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
@@ -52,4 +53,18 @@ class ApplicationServiceTest {
         assertThat(actual.getName()).isSameAs(entity.getName());
     }
 
+    @Test
+    void 존재하는_대출신청_정상조회_테스트() {
+        Long findId = 1L;
+
+        Application entity = Application.builder()
+            .applicationId(1L)
+            .build();
+
+        when(applicationRepository.findById(findId)).thenReturn(Optional.ofNullable(entity));
+
+        Response actual = applicationService.get(findId);
+
+        assertThat(actual.getApplicationId()).isSameAs(entity.getApplicationId());
+    }
 }
