@@ -13,6 +13,7 @@ spring:
       hibernate:
         format_sql: true
       naming:
+        ## 엔티티 생성시 필드명명규칙은 언더바규칙이므로 그렇게 생성되게 설정
         physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
     database-platform: org.hibernate.dialect.H2Dialect
   h2:
