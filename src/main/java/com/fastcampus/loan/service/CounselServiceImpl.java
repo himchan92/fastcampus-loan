@@ -10,9 +10,11 @@ import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor //final 붙은 객체 DI 지원
+@Transactional
 public class CounselServiceImpl implements CounselService {
 
     private final CounselRepository counselRepository;
@@ -33,6 +35,7 @@ public class CounselServiceImpl implements CounselService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Response get(Long counselId) {
         //조회 요청 하되 없으면 사용자정의 예외 처리
         Counsel counsel = counselRepository.findById(counselId).orElseThrow(() -> {
