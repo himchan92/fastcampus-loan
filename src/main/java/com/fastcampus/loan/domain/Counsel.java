@@ -22,7 +22,7 @@ import org.hibernate.annotations.Where;
 @DynamicInsert
 @DynamicUpdate
 @Builder
-@Where(clause = "is_deleted=false")
+@Where(clause = "is_deleted=false") //해당 컬럼 값일때만 조회되게 필터링
 public class Counsel extends BaseEntity{
 
     @Id

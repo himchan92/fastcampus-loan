@@ -10,4 +10,6 @@ public interface CounselService {
     Response get(Long counselId); //상담조회
 
     Response update(Long counselId, Request request); //상담수정
+    
+    void delete(Long counselId); //상담삭제
 }
