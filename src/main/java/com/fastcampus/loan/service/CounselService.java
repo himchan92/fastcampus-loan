@@ -6,4 +6,6 @@ import com.fastcampus.loan.dto.CounselDTO.Response;
 public interface CounselService {
 
     Response create(Request request); //상담등록
+    
+    Response get(Long counselId); //상담조회
 }
