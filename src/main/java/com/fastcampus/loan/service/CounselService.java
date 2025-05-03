@@ -8,4 +8,6 @@ public interface CounselService {
     Response create(Request request); //상담등록
     
     Response get(Long counselId); //상담조회
+
+    Response update(Long counselId, Request request); //상담수정
 }

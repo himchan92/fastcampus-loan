@@ -39,4 +39,23 @@ public class CounselServiceImpl implements CounselService {
 
         return modelMapper.map(counsel, Response.class);
     }
+
+    @Override
+    public Response update(Long counselId, Request request) {
+        // 수정 전 대상조회되는지 체크
+        Counsel counsel = counselRepository.findById(counselId).orElseThrow(() -> {
+            throw new BaseException(ResultType.SYSTEM_ERROR);
+        });
+
+        //JPA 변경감지 위해 요청값 setter 설정
+        counsel.setName(request.getName());
+        counsel.setCellPhone(request.getEmail());
+        counsel.setMemo(request.getMemo());
+        counsel.setAddress(request.getAddress());
+        counsel.setAddressDetail(request.getAddressDetail());
+        counsel.setZipCode(request.getZipCode());
+        counselRepository.save(counsel);
+
+        return modelMapper.map(counsel, Response.class);
+    }
 }
