@@ -13,7 +13,7 @@ spring:
       hibernate:
         format_sql: true
       naming:
-        physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+        physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy # 카멜케이스 방식 테이블컬럼명 생성
     database-platform: org.hibernate.dialect.H2Dialect
   h2:
     console:
