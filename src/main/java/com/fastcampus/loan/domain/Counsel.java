@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,8 +21,9 @@ import org.hibernate.annotations.Where;
 @AllArgsConstructor
 @DynamicInsert
 @DynamicUpdate
+@Builder
 @Where(clause = "is_deleted=false")
-public class CounselEntity extends BaseEntity{
+public class Counsel extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
