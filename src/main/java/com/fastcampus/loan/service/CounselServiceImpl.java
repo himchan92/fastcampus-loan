@@ -55,4 +55,14 @@ public class CounselServiceImpl implements CounselService{
 
         return modelMapper.map(counsel, Response.class);
     }
+
+    @Override
+    public void delete(Long counselId) {
+        Counsel counsel = counselRepository.findById(counselId)
+            .orElseThrow(() -> new BaseException(ResultType.SYSTEM_ERROR));
+
+        counsel.setIsDeleted(true); //소프트 삭제: 실 삭제아님
+
+        counselRepository.save(counsel);
+    }
 }
